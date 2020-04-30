@@ -1,6 +1,9 @@
 import axios from 'axios'
-import { baseURL, fetchAuthParams, redirectToAuthPage } from '@/workers/api'
+import { fetchAuthParams, calcAuthEndPointUrl } from '@/workers/authorization'
 import PathStorage from '@/workers/PathStorage'
+
+const baseURL =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api' : '/api'
 
 const api = axios.create({
   baseURL,
@@ -8,11 +11,10 @@ const api = axios.create({
 })
 
 api.interceptors.response.use(undefined, async err => {
-  if (err.response && err.response.status === 401) {
-    // if unauthorized
+  if (/* Unauthorized */ err.response?.status === 401) {
     const { data: authParams } = await fetchAuthParams()
     PathStorage.saveCurrentPath()
-    redirectToAuthPage(authParams)
+    window.location.assign(calcAuthEndPointUrl(authParams))
   }
   return Promise.reject(err)
 })
