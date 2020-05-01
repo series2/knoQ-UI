@@ -1,8 +1,28 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+import Vuetify, {
+  VAvatar,
+  VBtn,
+  VChip,
+  VIcon,
+  VList,
+  VListItem,
+  VListItemSubtitle,
+  VMenu,
+} from 'vuetify/lib'
 import colors from 'vuetify/lib/util/colors'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  components: {
+    VAvatar,
+    VBtn,
+    VChip,
+    VIcon,
+    VList,
+    VListItem,
+    VListItemSubtitle,
+    VMenu,
+  },
+})
 
 export default new Vuetify({
   theme: {

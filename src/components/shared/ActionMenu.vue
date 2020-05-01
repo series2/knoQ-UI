@@ -1,7 +1,7 @@
-<template>
+<template functional>
   <v-menu offset-y>
     <template #activator="{ on }">
-      <v-btn icon v-on="on">
+      <v-btn icon :class="data.staticClass" v-on="on">
         <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </template>

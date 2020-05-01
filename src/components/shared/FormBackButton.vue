@@ -1,5 +1,10 @@
-<template>
-  <v-btn depressed v-bind="$attrs" v-on="$listeners">
+<template functional>
+  <v-btn
+    depressed
+    v-bind="data.attrs"
+    :class="data.staticClass"
+    v-on="listeners"
+  >
     <slot />
   </v-btn>
 </template>

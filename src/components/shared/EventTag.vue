@@ -1,37 +1,35 @@
-<template>
+<template functional>
   <v-chip
     small
     label
-    :to="to"
+    :to="
+      props.toTagPageOnClick
+        ? { path: '/events', query: { tags: props.name } }
+        : undefined
+    "
     :ripple="false"
-    v-bind="$attrs"
-    v-on="$listeners"
+    v-bind="data.attrs"
+    :class="data.staticClass"
+    v-on="listeners"
   >
-    <span class="text--secondary">{{ name }}</span>
+    <span class="text--secondary">{{ props.name }}</span>
   </v-chip>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
-import { RawLocation } from 'vue-router'
 
-@Component
-export default class EventTag extends Vue {
-  @Prop({ type: String, required: true })
-  name!: string
-
-  @Prop({ type: Boolean, default: false })
-  toTagPageOnClick!: boolean
-
-  get to(): RawLocation | undefined {
-    if (!this.toTagPageOnClick) {
-      return undefined
-    }
-    return {
-      path: '/events',
-      query: { tags: this.name },
-    }
-  }
-}
+export default Vue.extend({
+  name: 'EventTag',
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    toTagPageOnClick: {
+      type: Boolean,
+      default: false,
+    },
+  },
+})
 </script>

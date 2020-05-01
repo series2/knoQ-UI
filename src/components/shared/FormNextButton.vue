@@ -1,5 +1,11 @@
-<template>
-  <v-btn depressed color="primary" v-bind="$attrs" v-on="$listeners">
+<template functional>
+  <v-btn
+    depressed
+    color="primary"
+    v-bind="data.attrs"
+    :class="data.staticClass"
+    v-on="listeners"
+  >
     <slot />
   </v-btn>
 </template>
