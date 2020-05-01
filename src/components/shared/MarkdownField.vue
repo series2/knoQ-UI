@@ -19,5 +19,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style src="highlight.js/styles/atom-one-light.css" />
