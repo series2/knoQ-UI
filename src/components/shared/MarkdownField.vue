@@ -1,22 +1,23 @@
-<template>
-  <!-- eslint-disable-next-line vue/no-v-html -->
-  <div v-html="rendered" />
-</template>
-
 <script lang="ts">
 import Vue from 'vue'
-import { Component, Prop } from 'vue-property-decorator'
 import { render } from '@/workers/markdown-it'
 
-@Component
-export default class MarkdownField extends Vue {
-  @Prop({ type: String, required: true })
-  src!: string
-
-  get rendered(): string {
-    return render(this.src)
-  }
-}
+export default Vue.extend({
+  name: 'MarkdownField',
+  functional: true,
+  props: {
+    src: {
+      type: String,
+      required: true,
+    },
+  },
+  render(h, { props, data }) {
+    return h('div', {
+      class: data.staticClass,
+      domProps: { innerHTML: render(props.src) },
+    })
+  },
+})
 </script>
 
 <style src="highlight.js/styles/atom-one-light.css" />
